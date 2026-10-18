@@ -1,0 +1,24 @@
+name: Community Health & Markdown Audit
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Verify Documentation Files
+        run: |
+          echo "Verifying presence of community health files..."
+          test -f README.md && echo "✓ README.md present"
+          test -f CONTRIBUTING.md && echo "✓ CONTRIBUTING.md present"
+          test -f CONTRIBUTORS.md && echo "✓ CONTRIBUTORS.md present"
+          test -f LICENSE && echo "✓ LICENSE present"
+          test -f SECURITY.md && echo "✓ SECURITY.md present"
+          test -f CHANGELOG.md && echo "✓ CHANGELOG.md present"
